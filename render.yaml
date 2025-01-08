@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: mermaid-diagram-generator
+    envvars:
+      - key: GROQ_API_KEY
+        from_secret: GROQ_API_KEY
+    build_command: pip install -r requirements.txt
+    start_command: python web.py
+    ports:
+      - port: 5000
