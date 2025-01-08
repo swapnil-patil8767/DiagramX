@@ -5,4 +5,4 @@ dataclasses
 python-dotenv
 crewai
 gunicorn
-
+langchain_groq 
