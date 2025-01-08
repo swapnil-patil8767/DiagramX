@@ -90,12 +90,14 @@ crew = Crew(
     agents=[mermaid_code_generator, mermaid_code_optimizer],
     tasks=[generate_mermaid_task, optimize_mermaid_task]
 )
-
 @app.route('/')
 def index():
-    return send_file('index.html')
+    try:
+        return send_file('index.html')
+    except Exception as e:
+        return str(e), 500
 
-
+# Your existing generate-mermaid endpoint
 @app.route('/generate-mermaid', methods=['POST'])
 def generate_mermaid():
     data = request.json
@@ -112,7 +114,6 @@ def generate_mermaid():
         start_marker = "```mermaid"
         end_marker = "```"
 
-        # Find the starting and ending indices
         start_index = output.find(start_marker)
         if start_index == -1:
             return "No mermaid block found."
@@ -121,7 +122,6 @@ def generate_mermaid():
         if end_index == -1:
             return "Incomplete mermaid block found."
 
-        # Extract the code between the markers
         start_index += len(start_marker)
         mermaid_code = output[start_index:end_index].strip()
         return mermaid_code
@@ -130,5 +130,6 @@ def generate_mermaid():
     return jsonify({'mermaidCode': mermaid_code})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
-
+    # Use PORT environment variable if available (for Render deployment)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
