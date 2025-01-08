@@ -91,6 +91,11 @@ crew = Crew(
     tasks=[generate_mermaid_task, optimize_mermaid_task]
 )
 
+@app.route('/')
+def index():
+    return send_file('index.html')
+
+
 @app.route('/generate-mermaid', methods=['POST'])
 def generate_mermaid():
     data = request.json
