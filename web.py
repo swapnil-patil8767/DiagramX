@@ -90,14 +90,15 @@ crew = Crew(
     agents=[mermaid_code_generator, mermaid_code_optimizer],
     tasks=[generate_mermaid_task, optimize_mermaid_task]
 )
+
 @app.route('/')
 def index():
     try:
-        return send_file('index.html')
+        with open('index.html', 'r') as file:
+            return file.read(), 200, {'Content-Type': 'text/html'}
     except Exception as e:
         return str(e), 500
 
-# Your existing generate-mermaid endpoint
 @app.route('/generate-mermaid', methods=['POST'])
 def generate_mermaid():
     data = request.json
@@ -130,6 +131,5 @@ def generate_mermaid():
     return jsonify({'mermaidCode': mermaid_code})
 
 if __name__ == "__main__":
-    # Use PORT environment variable if available (for Render deployment)
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=port)
