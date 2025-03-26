@@ -438,14 +438,18 @@
         }
 
         async function generateMermaidCode() {
-            const description = document.getElementById('description-input').value;
-            const response = await fetch('http://localhost:5000/generate-mermaid', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ description })
-            });
+    const description = document.getElementById('description-input').value;
+    const apiUrl = window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000/generate-mermaid' 
+        : '/generate-mermaid';
+
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ description })
+    });
 
             if (response.ok) {
                 const data = await response.json();
