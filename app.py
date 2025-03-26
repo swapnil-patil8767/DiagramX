@@ -6,6 +6,22 @@ from langchain_groq import ChatGroq
 
 app = Flask(__name__)
 CORS(app)
+@app.route('/')
+def index():
+    return jsonify({
+        'message': 'Mermaid Diagram Generator API',
+        'endpoints': [
+            '/generate-mermaid (POST)'
+        ]
+    })
+
+# Add error handler for 404
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        'error': 'Not Found',
+        'message': 'The requested endpoint does not exist.'
+    }), 404
 
 # Set up your Groq API key
 os.environ["GROQ_API_KEY"] =  "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"
@@ -127,6 +143,4 @@ def generate_mermaid():
     return jsonify({'mermaidCode': mermaid_code})
 
 if __name__ == '__main__':
-    # Use port from environment variable or default to 8080
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
