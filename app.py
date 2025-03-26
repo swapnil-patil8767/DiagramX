@@ -1,11 +1,22 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 from crewai import Agent, Task, Crew
 from langchain_groq import ChatGroq
 
-app = Flask(__name__)
-CORS(app)
+
+app = Flask(__name__, static_folder='.')
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "https://diagramx-8.onrender.com",  # Your Render deployment URL
+            "http://localhost:5000",            # Local development
+            "*"                                 # Be cautious with this in production
+        ]
+    }
+})
+
+
 @app.route('/')
 def index():
     return jsonify({
