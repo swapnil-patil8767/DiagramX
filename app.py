@@ -4,8 +4,7 @@ import os
 from crewai import Agent, Task, Crew
 from langchain_groq import ChatGroq
 
-
-app = Flask(__name__, static_folder='.')
+app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app, resources={
     r"/*": {
         "origins": [
@@ -16,26 +15,8 @@ CORS(app, resources={
     }
 })
 
-
-@app.route('/')
-def index():
-    return jsonify({
-        'message': 'Mermaid Diagram Generator API',
-        'endpoints': [
-            '/generate-mermaid (POST)'
-        ]
-    })
-
-# Add error handler for 404
-@app.errorhandler(404)
-def not_found(error):
-    return jsonify({
-        'error': 'Not Found',
-        'message': 'The requested endpoint does not exist.'
-    }), 404
-
 # Set up your Groq API key
-os.environ["GROQ_API_KEY"] =  "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"
+os.environ["GROQ_API_KEY"] = "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"
 
 # Initialize the Groq LLM
 groq = ChatGroq(
@@ -64,8 +45,6 @@ generate_mermaid_task = Task(
     4. At time of generating a flowchart diagram do not write code for end state
     5. Add proper color combination for the diagram
     
-    7. dont write code for end state
-
     Focus on:
     ER Diagrams 
     Flowcharts
@@ -99,7 +78,6 @@ optimize_mermaid_task = Task(
     2. Making improvements for better visual representation
     3. Adding additional elements as requested by the user
     4. Ensuring compatibility with Mermaid.js standards
-    6. Remove any end state code from the diagram
     
     Focus on:
     - Syntax corrections
@@ -120,6 +98,11 @@ crew = Crew(
     tasks=[generate_mermaid_task, optimize_mermaid_task]
 )
 
+# Default route to serve index.html
+@app.route('/')
+def index():
+    return send_from_directory('.', 'index.html')
+
 @app.route('/generate-mermaid', methods=['POST'])
 def generate_mermaid():
     data = request.json
@@ -139,11 +122,11 @@ def generate_mermaid():
         # Find the starting and ending indices
         start_index = output.find(start_marker)
         if start_index == -1:
-            return "No mermaid block found."
+            return output.strip()  # Return the entire output if no markers found
 
         end_index = output.find(end_marker, start_index + len(start_marker))
         if end_index == -1:
-            return "Incomplete mermaid block found."
+            return output[start_index + len(start_marker):].strip()
 
         # Extract the code between the markers
         start_index += len(start_marker)
@@ -153,5 +136,10 @@ def generate_mermaid():
     mermaid_code = extract_mermaid_code(result)
     return jsonify({'mermaidCode': mermaid_code})
 
+# Add error handler for 404
+@app.errorhandler(404)
+def not_found(error):
+    return send_from_directory('.', 'index.html')
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
