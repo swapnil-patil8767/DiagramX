@@ -8,23 +8,22 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app, resources={
     r"/*": {
         "origins": [
-            "https://diagramx-8.onrender.com",  # Your Render deployment URL
-            "http://localhost:5000",            # Local development
-            "*"                                 # Be cautious with this in production
+            "https://diagramx-8.onrender.com",  
+            "http://localhost:5000",          
+            "*"                     
         ]
     }
 })
 
-# Set up your Groq API key
 os.environ["GROQ_API_KEY"] = "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"
 
-# Initialize the Groq LLM
+
 groq = ChatGroq(
     model_name="groq/qwen-2.5-coder-32b",
     temperature=0.7,
 )
 
-# Create customer support agent
+
 # Agent 1: Mermaid Code Generator
 mermaid_code_generator = Agent(
     role='Mermaid Diagram Creator',
@@ -35,7 +34,7 @@ mermaid_code_generator = Agent(
     llm=groq
 )
 
-# Define task for Mermaid code generation
+
 generate_mermaid_task = Task(
     description="""
     Create Mermaid.js code for diagrams based on user input by:
@@ -92,13 +91,12 @@ optimize_mermaid_task = Task(
     agent=mermaid_code_optimizer
 )
 
-# Create and run the crew
+
 crew = Crew(
     agents=[mermaid_code_generator, mermaid_code_optimizer],
     tasks=[generate_mermaid_task, optimize_mermaid_task]
 )
 
-# Default route to serve index.html
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
@@ -136,10 +134,21 @@ def generate_mermaid():
     mermaid_code = extract_mermaid_code(result)
     return jsonify({'mermaidCode': mermaid_code})
 
-# Add error handler for 404
+
 @app.errorhandler(404)
 def not_found(error):
     return send_from_directory('.', 'index.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+
+
+
+
+"""https://dashboard.render.com/web/srv-cvi2sdjtq21c73fpsgn0/deploys/dep-cvi2sf3tq21c73fpsheg
+
+
+https://diagramx-9.onrender.com/
+
+
+https://diagramx-visualize-3d.lovable.app/"""
