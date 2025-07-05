@@ -41,6 +41,7 @@
 ## 🏗️ System Architecture
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor': '#0d1117', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#30363d', 'lineColor': '#58a6ff', 'sectionBkgColor': '#0d1117', 'altSectionBkgColor': '#161b22', 'gridColor': '#21262d', 'secondaryColor': '#161b22', 'tertiaryColor': '#21262d', 'edgeLabelBackground': '#0d1117', 'clusterBkg': '#161b22', 'clusterBorder': '#30363d'}}}%%
 graph TB
     subgraph "🌐 Frontend Layer"
         A[Web Browser] --> B[HTML5/CSS3/JS Interface]
@@ -68,28 +69,28 @@ graph TB
         P[CDN Resources]
     end
     
-    A --> F
-    I --> J
-    M --> N
-    F --> O
-    B --> P
+    A -.-> F
+    I ==> J
+    M -.-> N
+    F ==> O
+    B -.-> P
     
-    style A fill:#6a5acd,stroke:#4a3c9a,stroke-width:2px,color:#fff
-    style B fill:#00c9ff,stroke:#0099cc,stroke-width:2px,color:#fff
-    style C fill:#00c9ff,stroke:#0099cc,stroke-width:2px,color:#fff
-    style D fill:#00c9ff,stroke:#0099cc,stroke-width:2px,color:#fff
-    style E fill:#00c9ff,stroke:#0099cc,stroke-width:2px,color:#fff
-    style F fill:#ff6b6b,stroke:#ff4757,stroke-width:2px,color:#fff
-    style G fill:#ff6b6b,stroke:#ff4757,stroke-width:2px,color:#fff
-    style H fill:#ff6b6b,stroke:#ff4757,stroke-width:2px,color:#fff
-    style I fill:#ff6b6b,stroke:#ff4757,stroke-width:2px,color:#fff
-    style J fill:#4ecdc4,stroke:#26a69a,stroke-width:2px,color:#fff
-    style K fill:#4ecdc4,stroke:#26a69a,stroke-width:2px,color:#fff
-    style L fill:#4ecdc4,stroke:#26a69a,stroke-width:2px,color:#fff
-    style M fill:#4ecdc4,stroke:#26a69a,stroke-width:2px,color:#fff
-    style N fill:#feca57,stroke:#ff9ff3,stroke-width:2px,color:#fff
-    style O fill:#feca57,stroke:#ff9ff3,stroke-width:2px,color:#fff
-    style P fill:#feca57,stroke:#ff9ff3,stroke-width:2px,color:#fff
+    style A fill:#7c3aed,stroke:#a855f7,stroke-width:3px,color:#fff
+    style B fill:#0ea5e9,stroke:#0284c7,stroke-width:3px,color:#fff
+    style C fill:#0ea5e9,stroke:#0284c7,stroke-width:3px,color:#fff
+    style D fill:#0ea5e9,stroke:#0284c7,stroke-width:3px,color:#fff
+    style E fill:#0ea5e9,stroke:#0284c7,stroke-width:3px,color:#fff
+    style F fill:#ef4444,stroke:#dc2626,stroke-width:3px,color:#fff
+    style G fill:#ef4444,stroke:#dc2626,stroke-width:3px,color:#fff
+    style H fill:#ef4444,stroke:#dc2626,stroke-width:3px,color:#fff
+    style I fill:#ef4444,stroke:#dc2626,stroke-width:3px,color:#fff
+    style J fill:#10b981,stroke:#059669,stroke-width:3px,color:#fff
+    style K fill:#10b981,stroke:#059669,stroke-width:3px,color:#fff
+    style L fill:#10b981,stroke:#059669,stroke-width:3px,color:#fff
+    style M fill:#10b981,stroke:#059669,stroke-width:3px,color:#fff
+    style N fill:#f59e0b,stroke:#d97706,stroke-width:3px,color:#fff
+    style O fill:#f59e0b,stroke:#d97706,stroke-width:3px,color:#fff
+    style P fill:#f59e0b,stroke:#d97706,stroke-width:3px,color:#fff
 ```
 
 ## 🛠️ Technology Stack
