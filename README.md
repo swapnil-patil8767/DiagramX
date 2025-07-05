@@ -227,7 +227,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  <strong>Made with ❤️ by Swapmil Patil</strong>
+
   <br>
   <sub>If you found this helpful, please consider giving it a ⭐</sub>
 </div>
