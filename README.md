@@ -2,8 +2,7 @@
 
 
 
-
-#                  DiagramX - AI-Powered Text to Diagram Generator
+# <div align="center"> DiagramX - AI-Powered Text to Diagram Generator</div>
 
 <div align="center">
   
@@ -37,6 +36,96 @@
 - **Educational Content** - Create diagrams for teaching and presentations
 - **Project Planning** - Map out project timelines and dependencies
 - **Database Design** - Generate ER diagrams for database schemas
+
+  
+## 🏗️ System Architecture
+
+```mermaid
+graph TB
+    subgraph "🌐 Frontend Layer"
+        A[Web Browser] --> B[HTML5/CSS3/JS Interface]
+        B --> C[Monaco Code Editor]
+        B --> D[Mermaid.js Renderer]
+        B --> E[Theme Selector]
+    end
+    
+    subgraph "🐍 Backend Layer"
+        F[Flask Web Server] --> G[CORS Handler]
+        F --> H[Static File Server]
+        F --> I[API Endpoints]
+    end
+    
+    subgraph "🤖 AI Processing Layer"
+        J[CrewAI Framework] --> K[Mermaid Code Generator Agent]
+        J --> L[Code Optimizer Agent]
+        K --> M[Groq LLM API]
+        L --> M
+    end
+    
+    subgraph "☁️ External Services"
+        N[Groq Cloud Platform]
+        O[Render Deployment]
+        P[CDN Resources]
+    end
+    
+    A --> F
+    I --> J
+    M --> N
+    F --> O
+    B --> P
+    
+    style A fill:#6a5acd,stroke:#4a3c9a,stroke-width:2px,color:#fff
+    style B fill:#00c9ff,stroke:#0099cc,stroke-width:2px,color:#fff
+    style C fill:#00c9ff,stroke:#0099cc,stroke-width:2px,color:#fff
+    style D fill:#00c9ff,stroke:#0099cc,stroke-width:2px,color:#fff
+    style E fill:#00c9ff,stroke:#0099cc,stroke-width:2px,color:#fff
+    style F fill:#ff6b6b,stroke:#ff4757,stroke-width:2px,color:#fff
+    style G fill:#ff6b6b,stroke:#ff4757,stroke-width:2px,color:#fff
+    style H fill:#ff6b6b,stroke:#ff4757,stroke-width:2px,color:#fff
+    style I fill:#ff6b6b,stroke:#ff4757,stroke-width:2px,color:#fff
+    style J fill:#4ecdc4,stroke:#26a69a,stroke-width:2px,color:#fff
+    style K fill:#4ecdc4,stroke:#26a69a,stroke-width:2px,color:#fff
+    style L fill:#4ecdc4,stroke:#26a69a,stroke-width:2px,color:#fff
+    style M fill:#4ecdc4,stroke:#26a69a,stroke-width:2px,color:#fff
+    style N fill:#feca57,stroke:#ff9ff3,stroke-width:2px,color:#fff
+    style O fill:#feca57,stroke:#ff9ff3,stroke-width:2px,color:#fff
+    style P fill:#feca57,stroke:#ff9ff3,stroke-width:2px,color:#fff
+```
+
+## 🛠️ Technology Stack
+
+- **Backend**: Flask (Python)
+- **Frontend**: HTML5, CSS3, JavaScript
+- **AI Engine**: CrewAI + Groq LLM
+- **Code Editor**: Monaco Editor
+- **Diagram Rendering**: Mermaid.js
+- **Deployment**: Render
+
+## 🔄 Data Flow
+
+```mermaid
+sequenceDiagram
+    participant User as 👤 User
+    participant Frontend as 🖥️ Frontend
+    participant Flask as 🐍 Flask API
+    participant CrewAI as 🤖 CrewAI
+    participant Groq as ⚡ Groq LLM
+    participant Mermaid as 📊 Mermaid.js
+    
+    User->>Frontend: Enter diagram description
+    User->>Frontend: Click "Generate Diagram"
+    Frontend->>Flask: POST /generate-mermaid
+    Flask->>CrewAI: Process description
+    CrewAI->>Groq: Generate Mermaid code
+    Groq-->>CrewAI: Return generated code
+    CrewAI->>Groq: Optimize & enhance code
+    Groq-->>CrewAI: Return optimized code
+    CrewAI-->>Flask: Final Mermaid code
+    Flask-->>Frontend: JSON response
+    Frontend->>Mermaid: Render diagram
+    Mermaid-->>Frontend: SVG diagram
+    Frontend-->>User: Display diagram
+```
 
 ## 🚀 Quick Start
 
@@ -141,3 +230,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   <br>
   <sub>If you found this helpful, please consider giving it a ⭐</sub>
 </div>
+
+
+
+
+
